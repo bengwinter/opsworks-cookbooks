@@ -87,10 +87,6 @@ execute 'Delete downloaded ruby packages' do
    end
 end
 
-yum_package "postgresql-devel" do
-  action :install
-  Chef::Log.info("Postgresql-devel installed")
-end
 
 include_recipe 'opsworks_rubygems'
 include_recipe 'opsworks_bundler'
