@@ -1,5 +1,10 @@
 include_recipe "deploy"
 
+yum_package "postgresql-devel" do
+  action :install
+  Chef::Log.info("Postgresql-devel installed")
+end
+
 node[:deploy].each do |application, deploy|
   deploy = node[:deploy][application]
 
