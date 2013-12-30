@@ -15,16 +15,16 @@ module OpsWorks
             Chef::Log.info("Looks like #{app_name} uses mysql2 in its Gemfile")
             'mysql2'
           else
-            Chef::Log.info("Gem mysql2 not found in the Gemfile of #{app_name}, defaulting to mysql")
-            'mysql'
+            Chef::Log.info("Gem mysql2 not found in the Gemfile of #{app_name}, defaulting to postgresql")
+            'postgresql'
           end
         else # no Gemfile - guess adapter by Rails version
           adapter = if File.exists?("#{app_root_path}/config/application.rb")
-            Chef::Log.info("Looks like #{app_name} is a Rails 3 application, defaulting to mysql2")
-            'mysql2'
+            Chef::Log.info("Looks like #{app_name} is a Rails 3 application, defaulting to postgresql")
+            'postgresql'
           else
-            Chef::Log.info("No config/application.rb found, assuming #{app_name} is a Rails 2 application, defaulting to mysql")
-            'mysql'
+            Chef::Log.info("No config/application.rb found, assuming #{app_name} is a Rails 2 application, defaulting to postgresql")
+            'postgresql'
           end
         end
 
