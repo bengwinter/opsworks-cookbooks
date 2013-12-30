@@ -3,7 +3,10 @@ include_attribute 'deploy::rails_stack'
 
 default[:opsworks][:deploy_user][:shell] = '/bin/bash'
 default[:opsworks][:deploy_user][:user] = 'deploy'
+<<<<<<< HEAD
 # the $HOME of the deploy user can be overwritten with this variable.
+=======
+>>>>>>> fe3dbd0db74604fb8606e9a2f434b2393b3c9b90
 #default[:opsworks][:deploy_user][:home] = '/home/deploy'
 
 case node[:platform]

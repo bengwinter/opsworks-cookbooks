@@ -15,18 +15,29 @@ node.set[:ebs][:raids].each do |raid_device, options|
     BlockDevice::wait_for(disk_device)
   end
 
+<<<<<<< HEAD
   execute "mkfs_#{lvm_device}" do
     command "test \"$(blkid -s TYPE -o value #{lvm_device})\" = \"#{options[:fstype]}\" || mkfs -t #{options[:fstype]} #{lvm_device}"
+=======
+  execute 'mkfs' do
+    command "test $(blkid -s TYPE -o value #{lvm_device}) = #{options[:fstype]} || mkfs -t #{options[:fstype]} #{lvm_device}"
+>>>>>>> fe3dbd0db74604fb8606e9a2f434b2393b3c9b90
     action :nothing
   end
 
   ruby_block "Create or attach LVM volume out of #{raid_device}" do
     block do
       BlockDevice.create_lvm(raid_device, options)
+<<<<<<< HEAD
       BlockDevice.wait_for(lvm_device)
     end
     action :nothing
     notifies :run, "execute[mkfs_#{lvm_device}]", :immediately
+=======
+    end
+    action :nothing
+    notifies :run, resources(:execute => 'mkfs'), :immediately
+>>>>>>> fe3dbd0db74604fb8606e9a2f434b2393b3c9b90
   end
 
   ruby_block "Create or resume RAID array #{raid_device}" do
@@ -42,7 +53,11 @@ node.set[:ebs][:raids].each do |raid_device, options|
       end
       BlockDevice.set_read_ahead(raid_device, node[:ebs][:md_read_ahead])
     end
+<<<<<<< HEAD
     notifies :create, "ruby_block[Create or attach LVM volume out of #{raid_device}]", :immediately
+=======
+    notifies :create, resources(:ruby_block => "Create or attach LVM volume out of #{raid_device}"), :immediately
+>>>>>>> fe3dbd0db74604fb8606e9a2f434b2393b3c9b90
   end
 
   directory options[:mount_point] do

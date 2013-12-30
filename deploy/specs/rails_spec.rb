@@ -24,7 +24,10 @@ describe_recipe 'deploy::rails' do
 
   it 'should write a valid database configuration' do
     node[:deploy].each do |app, deploy|
+<<<<<<< HEAD
       next if deploy[:application_type] == 'rails'
+=======
+>>>>>>> fe3dbd0db74604fb8606e9a2f434b2393b3c9b90
       cfg = YAML.load_file("#{deploy[:deploy_to]}/shared/config/database.yml")
       ["development", "production", deploy[:rails_env]].uniq.each do |env|
         cfg[env]['adapter'].must_equal deploy[:database][:adapter].to_s

@@ -21,8 +21,14 @@ describe_recipe 'opsworks_ganglia::configure-client' do
     file('/etc/ganglia/gmond.conf').must_include node[:opsworks][:stack][:name]
   end
 
+<<<<<<< HEAD
   it 'makes sure gmond is running if necessary' do
     if @monitoring_master
+=======
+  it 'makes sure gmond is stopped if there is no monitoring master' do
+    monitoring_master = node[:opsworks][:layers]['monitoring-master'][:instances].collect{|instance, names| names["private_ip"]}.first rescue nil
+    if monitoring_master
+>>>>>>> fe3dbd0db74604fb8606e9a2f434b2393b3c9b90
       service('gmond').must_be_running
     else
       service('gmond').wont_be_running

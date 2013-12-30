@@ -26,9 +26,15 @@ when "debian"
     only_if { ::File.exists?('/tmp/ganglia-monitor-python.deb') }
   end
 
+<<<<<<< HEAD
 when "rhel"
   package node[:ganglia][:monitor_package_name]
   package node[:ganglia][:monitor_plugins_package_name]
+=======
+when 'centos','redhat','fedora','amazon'
+  package 'ganglia-gmond'
+  package 'ganglia-gmond-python'
+>>>>>>> fe3dbd0db74604fb8606e9a2f434b2393b3c9b90
 end
 
 execute 'stop gmond with non-updated configuration' do
