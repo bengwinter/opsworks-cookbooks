@@ -37,15 +37,12 @@ service 'apache2' do
   action :enable
 end
 
-<<<<<<< HEAD
 if platform?("debian","ubuntu")
   execute "reset permission of #{node[:apache][:log_dir]}" do
     command "chmod 0755 #{node[:apache][:log_dir]}"
   end
 end
 
-=======
->>>>>>> fe3dbd0db74604fb8606e9a2f434b2393b3c9b90
 execute 'logdir_existence_and_restart_apache2' do
   command "ls -la #{node[:apache][:log_dir]}"
   action :nothing

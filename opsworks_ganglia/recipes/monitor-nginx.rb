@@ -5,19 +5,10 @@ template "/etc/ganglia/conf.d/nginx_status.pyconf" do
   mode "0644"
 end
 
-<<<<<<< HEAD
 template "nginx_status.py" do
   path value_for_platform_family(
       "rhel" => "/usr/lib#{RUBY_PLATFORM[/64/]}/ganglia/python_modules/nginx_status.py",
       "debian" => '/usr/lib/ganglia/python_modules/nginx_status.py'
-=======
-template 'nginx_status.py' do
-  path value_for_platform(
-    ['centos','redhat','fedora','amazon'] => {
-      'default' => "/usr/#{RUBY_PLATFORM.match(/64/) ? 'lib64' : 'lib'}/ganglia/python_modules/nginx_status.py"
-      },
-      ['debian','ubuntu'] => {'default' => '/usr/lib/ganglia/python_modules/nginx_status.py'}
->>>>>>> fe3dbd0db74604fb8606e9a2f434b2393b3c9b90
     )
   source "nginx_status.py.erb"
   owner "root"

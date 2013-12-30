@@ -4,15 +4,11 @@
 
 local_ruby_up_to_date = ::File.exists?(node[:ruby][:executable]) &&
                         system("#{node[:ruby][:executable]} -v | grep '#{node['ruby']['version']}' > /dev/null 2>&1") &&
-<<<<<<< HEAD
                         if ['debian','ubuntu'].include?(node[:platform])
                           system("dpkg --get-selections | grep -v deinstall | grep 'opsworks-ruby' > /dev/null 2>&1")
                         else
                           system("rpm -qa | grep 'opsworks-ruby' > /dev/null 2>&1")
                         end
-=======
-                        system("rpm -qa | grep 'opsworks-ruby' > /dev/null 2>&1")
->>>>>>> fe3dbd0db74604fb8606e9a2f434b2393b3c9b90
 
 if local_ruby_up_to_date
   Chef::Log.info("Userspace Ruby version is #{node['ruby']['version']} - up-to-date")
